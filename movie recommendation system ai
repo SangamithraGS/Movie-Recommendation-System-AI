@@ -1,0 +1,47 @@
+user_data = {
+    "Ashwin": {"genres": {"Action": 5, "Comedy": 3, "Drama": 2}},
+    "Akshay": {"genres": {"Action": 2, "Comedy": 4, "Drama": 5}},
+    "Roshan": {"genres": {"Action": 3, "Comedy": 2, "Drama": 4}},
+    "Sharvesh": {"genres": {"Action": 4, "Comedy": 3, "Drama": 1}},
+    "Vishal": {"genres": {"Action": 1, "Comedy": 5, "Drama": 4}},
+    "Sahana": {"genres": {"Action": 2, "Comedy": 1, "Drama": 5}},
+    "Nila": {"genres": {"Action": 3, "Comedy": 4, "Drama": 2}},
+    "Shalini": {"genres": {"Action": 5, "Comedy": 2, "Drama": 3}},
+    "Veronica": {"genres": {"Action": 4, "Comedy": 3, "Drama": 2}},
+    "Mythili": {"genres": {"Action": 2, "Comedy": 5, "Drama": 4}}
+}
+
+def recommend_movie(user_name, user_data):
+    if user_name not in user_data:
+        return "User not found"
+
+    max_genre = max(user_data[user_name]["genres"], key=user_data[user_name]["genres"].get)
+
+    movie_database = {
+        "The Equalizer": {"genre": "Action"},
+        "The Holdovers": {"genre": "Comedy"},
+        "Oppenheimer": {"genre": "Drama"},
+        "Mission: Impossible": {"genre": "Action"},
+        "Ghostbusters: Frozen Empire": {"genre": "Comedy"},
+        "Killers of the Flower Moon": {"genre": "Drama"},
+        "The Dark Knight": {"genre": "Action"},
+        "Orion and the Dark": {"genre": "Comedy"},
+        "Leave the World Behind": {"genre": "Drama"},
+        "Mad Max: Fury Road": {"genre": "Action"},
+    }
+
+    recommended_movies = [movie for movie, info in movie_database.items() if info["genre"] == max_genre]
+
+    return recommended_movies
+
+while True:
+    user_name = input("Enter the name of the user: ")
+    recommended_movies = recommend_movie(user_name, user_data)
+    if recommended_movies:
+        print(f"Recommended movies for {user_name}: {recommended_movies}")
+    else:
+        print("User not found")
+    
+    another_user = input("Do you want to recommend a movie for another user? (yes/no): ")
+    if another_user.lower() != "yes":
+        break
